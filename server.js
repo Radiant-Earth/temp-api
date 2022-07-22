@@ -1,6 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+
+
+const routes = require('./routes');
+
 
 dotenv.config();
 
@@ -17,7 +22,13 @@ app.get('/', (req, res, next) => {
     })
 });
 
+app.use(routes)
 
-app.listen(PORT, () => {
-    console.log('server is running on port: ' + PORT)
-})
+
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log('Databse connected and server is running on port: ' + PORT)
+        })
+    })
+    .catch(console.log)

@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.get('/', (req, res, next) => {
     res.status(200).json({
-        message: 'Server is running on port: ' + PORT
+        message: 'Server is running on port: ' + PORT + " Knocking off this project."
     })
 });
 

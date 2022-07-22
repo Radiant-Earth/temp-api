@@ -18,7 +18,7 @@ async function createKoopon(req, res) {
     !discount ||
     !start_date ||
     !expiry_date ||
-    !quantity ||
+    !quantity 
     // !description
   ) {
     res.status(400).json({

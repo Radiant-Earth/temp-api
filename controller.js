@@ -20,8 +20,8 @@ async function createKoopon(req, res) {
     !discount ||
     !start_date ||
     !expiry_date ||
-    !quantity 
-    // !description
+    !quantity ||
+    !description
   ) {
     res.status(400).json({
       message: `fields missing`,

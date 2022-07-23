@@ -1,6 +1,13 @@
 const { Schema, model } = require("mongoose");
 const koopon = new Schema(
   {
+    is_minted: {
+        type: Boolean,
+        default: false
+    },
+    description: {
+        type: String
+    },
     account_id: {
       type: String,
       required: true,

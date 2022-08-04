@@ -93,8 +93,10 @@ async function updateMyCoupon(req, res) {
     message: 'something went wrong!'
   })
 
+  console.log(req.body)
+
   try {
-    const coupon = await Koopon.findByIdAndUpdate({ _id: id}, { data: req.body.data});
+    const coupon = await Koopon.findByIdAndUpdate({ _id: id}, { data: req.body.data}, { upsert: false});
 
     console.log('Updated==========> ', coupon)
 

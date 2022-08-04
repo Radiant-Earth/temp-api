@@ -96,7 +96,7 @@ async function updateMyCoupon(req, res) {
   console.log(req.body)
 
   try {
-    const coupon = await Koopon.findByIdAndUpdate({ _id: id}, { data: req.body.data}, { upsert: false});
+    const coupon = await Koopon.findByIdAndUpdate({ _id: id}, { data: req.body.data, is_minted: req.body.is_minted}, { upsert: false});
 
     console.log('Updated==========> ', coupon)
 

@@ -94,7 +94,9 @@ async function updateMyCoupon(req, res) {
   })
 
   try {
-    await Koopon.findByIdAndUpdate({ _id: id}, { data: req.body.data});
+    const coupon = await Koopon.findByIdAndUpdate({ _id: id}, { data: req.body.data});
+
+    console.log('Updated==========> ', coupon)
 
     const myCoupons = await Koopon.find({ account_id: req.body.ownerId});
 

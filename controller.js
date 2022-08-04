@@ -86,6 +86,39 @@ async function getMyCoupons(req, res) {
 }
 
 
+async function updateMyCoupon(req, res) {
+  const id = req.params.id;
+
+  if(!id) return res.status(404).json({
+    message: 'something went wrong!'
+  })
+
+  try {
+    await Koopon.findByIdAndUpdate({ _id: id}, { data: req.body.data});
+
+    const myCoupons = await Koopon.find({ account_id: req.body.account_id});
+
+    if (!myCoupons.length) return res.status(404).json({
+        message: 'No coupon found, create a coupon.'
+    })
 
 
-module.exports = { createKoopon, getMyCoupons };
+    return res.status(200).json({
+        message: 'successful!',
+        data: myCoupons
+    })
+
+  } catch (error) {
+    res.status(400).json({
+        message: 'Something went wrong!'
+    })
+  }
+
+}
+
+
+
+
+
+
+module.exports = { createKoopon, getMyCoupons, updateMyCoupon };

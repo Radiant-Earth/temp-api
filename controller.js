@@ -100,7 +100,7 @@ async function updateMyCoupon(req, res) {
 
     console.log('Updated==========> ', coupon)
 
-    const myCoupons = await Koopon.find({ account_id: req.body.ownerId});
+    const myCoupons = await Koopon.find({ account_id: req.body.data.ownerId});
 
     if (!myCoupons.length) return res.status(404).json({
         message: 'No coupon found, create a coupon.'

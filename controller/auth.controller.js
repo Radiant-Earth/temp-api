@@ -69,6 +69,7 @@ async function httpLoginUser(req, res) {
 
       return res.status(200).json({
         data: findUser,
+        message: 'Login successful!',
         success: response
       })
     });

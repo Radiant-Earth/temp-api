@@ -74,10 +74,10 @@ async function httpLoginUser(req, res) {
     });
 
     
-    return res.status(201).json({
-      message: 'User successfully created!',
-      success: true
-    });
+    // return res.status(201).json({
+    //   message: 'User successfully created!',
+    //   success: true
+    // });
 
     
   } catch (error) {

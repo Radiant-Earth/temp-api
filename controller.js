@@ -120,14 +120,20 @@ async function updateMyCoupon(req, res) {
 
 }
 
-async function getAllCoupons(req, res) {
 
+async function deleteCoupon(req, res) {
+  const id = req.params.id
 
   try {
-    const coupons = await Koopon.find();
+    const coupon = await Koopon.findOneAndDelete({ _id: id })
+    console.log('Deleted coupon ========> ', coupon);
+    if (!coupon) {
+      return res.status(404).json({
+        message: 'coupon doesn\'t exist!'
+      })
+    }
     return res.status(200).json({
         message: 'successful!',
-        data: coupons
     })
 
   } catch (error) {
@@ -142,5 +148,4 @@ async function getAllCoupons(req, res) {
 
 
 
-
-module.exports = { createKoopon, getMyCoupons, getAllCoupons, updateMyCoupon };
+module.exports = { createKoopon, getMyCoupons, getAllCoupons, updateMyCoupon, deleteCoupon };

@@ -19,16 +19,16 @@ var whitelist;
 var corsOptions;
 
 if (process.env.NODE_ENV === 'production') {
-    // whitelist = ['http://localhost:3000',]
-    // corsOptions = {
-        //   origin: function (origin, callback) {
-            //     if (whitelist.indexOf(origin) !== -1) {
-                //       callback(null, true)
-                //     } else {
-                    //       callback(new Error('Not allowed by CORS'))
-                    //     }
-                    //   }
-                    // }
+    whitelist = ['http://localhost:3000', 'https://koopon.vercel.app']
+    corsOptions = {
+          origin: function (origin, callback) {
+                if (whitelist.indexOf(origin) !== -1) {
+                      callback(null, true)
+                    } else {
+                          callback(new Error('Not allowed by CORS'))
+                        }
+                      }
+                    }
                 } else {
                     corsOptions = {}
                 }

@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 
+
 const routes = require('./routes');
+const authRoutes =  require('./routes/auth.routes');
 
 
 dotenv.config();
@@ -19,21 +21,21 @@ var corsOptions;
 if (process.env.NODE_ENV === 'production') {
     // whitelist = ['http://localhost:3000',]
     // corsOptions = {
-    //   origin: function (origin, callback) {
-    //     if (whitelist.indexOf(origin) !== -1) {
-    //       callback(null, true)
-    //     } else {
-    //       callback(new Error('Not allowed by CORS'))
-    //     }
-    //   }
-    // }
-} else {
-    corsOptions = {}
-}
+        //   origin: function (origin, callback) {
+            //     if (whitelist.indexOf(origin) !== -1) {
+                //       callback(null, true)
+                //     } else {
+                    //       callback(new Error('Not allowed by CORS'))
+                    //     }
+                    //   }
+                    // }
+                } else {
+                    corsOptions = {}
+                }
+                
 
-
-app.use(cors(corsOptions));
-app.use(express.json());
+                app.use(cors(corsOptions));
+                app.use(express.json());
 
 app.get('/', (req, res, next) => {
     res.status(200).json({
@@ -41,13 +43,15 @@ app.get('/', (req, res, next) => {
     })
 });
 
+app.use(authRoutes)
 app.use(routes)
 
 
+
 mongoose.connect(process.env.MONGODB_URI)
-    .then(() => {
-        app.listen(PORT, () => {
-            console.log('Databse connected and server is running on port: ' + PORT)
-        })
+.then(async () => {
+    app.listen(PORT, () => {
+        console.log('Databse connected and server is running on port: ' + PORT)
     })
-    .catch(console.log)
+})
+.catch(console.log)

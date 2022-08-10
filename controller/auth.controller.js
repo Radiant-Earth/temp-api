@@ -94,3 +94,28 @@ async function httpLoginUser(req, res) {
 
 
 module.exports = { httpCreateNewUser, httpLoginUser }
+
+
+
+// async function deleteCoupon(req, res) {
+//   const id = req.params.id
+
+//   try {
+//     const coupon = await Koopon.findOneAndDelete({ _id: id })
+//     console.log('Deleted coupon ========> ', coupon);
+//     if (!coupon) {
+//       return res.status(404).json({
+//         message: 'coupon doesn\'t exist!'
+//       })
+//     }
+//     return res.status(200).json({
+//         message: 'successful!',
+//     })
+
+//   } catch (error) {
+//     res.status(400).json({
+//         message: 'Something went wrong!'
+//     })
+//   }
+
+// }

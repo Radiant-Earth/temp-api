@@ -120,6 +120,24 @@ async function updateMyCoupon(req, res) {
 
 }
 
+async function getAllCoupons(req, res) {
+
+
+  try {
+    const coupons = await Koopon.find();
+    return res.status(200).json({
+        message: 'successful!',
+        data: coupons
+    })
+
+  } catch (error) {
+    res.status(400).json({
+        message: 'Something went wrong!'
+    })
+  }
+
+}
+
 
 async function deleteCoupon(req, res) {
   const id = req.params.id
@@ -143,6 +161,7 @@ async function deleteCoupon(req, res) {
   }
 
 }
+
 
 
 

@@ -11,6 +11,7 @@ async function createKoopon(req, res) {
     start_date,
     expiry_date,
     quantity,
+    store,
     _id
   } = req.body;
   if (
@@ -21,7 +22,8 @@ async function createKoopon(req, res) {
     !start_date ||
     !expiry_date ||
     !quantity ||
-    !description
+    !description ||
+    !store
   ) {
     res.status(400).json({
       message: `fields missing`,

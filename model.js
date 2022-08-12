@@ -39,7 +39,11 @@ const koopon = new Schema(
     issued_token: {
       type: String,
     },
-    data: {}
+    data: {},
+    store: {
+      type: String,
+      unique: true
+    }
   },
   { timestamps: true }
 );

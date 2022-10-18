@@ -35,8 +35,22 @@ async function httpCreateNewRaffle(req, res) {
   }
 
 }
-function httpGetRaffles(req, res) {
-  
+async function httpGetRaffles(req, res) {
+  try {
+    const allRaffles = await Raffle.find({});
+
+    res.status(200).json({
+      message: 'All raffles!',
+      success: true,
+      data: allRaffles
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: 'Unable to get all raffles',
+      success: false,
+      error: error.message
+    })
+  }
 }
 function httpGetSingleRaffle(req, res) {
   

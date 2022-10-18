@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 
 const routes = require('./routes');
 const authRoutes =  require('./routes/auth.routes');
+const raffleRoutes = require('./routes/raffle.routes');
 
 
 dotenv.config();
@@ -43,8 +44,10 @@ app.get('/', (req, res, next) => {
     })
 });
 
-app.use(authRoutes)
-app.use(routes)
+app.use(authRoutes);
+app.use(routes);
+app.use(raffleRoutes);
+
 
 
 

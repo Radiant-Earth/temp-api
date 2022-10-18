@@ -54,7 +54,7 @@ app.use(raffleRoutes);
 mongoose.connect(process.env.MONGODB_URI)
 .then(async () => {
     app.listen(PORT, () => {
-        console.log('Databse connected and server is running on port: ' + PORT)
+        console.log('Database connected and server is running on port: ' + PORT)
     })
 })
 .catch(console.log)

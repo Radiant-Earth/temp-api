@@ -14,9 +14,9 @@ async function httpCreateNewRaffle(req, res) {
 
 
   try {
-    const newRaffle = new Raffle(
+    const newRaffle = new Raffle({
       ...req.body
-    )
+    })
 
     await newRaffle.save();
 

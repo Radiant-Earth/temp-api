@@ -18,19 +18,23 @@ const koopon = new Schema(
     },
     store_name: {
       type: String,
-      required: true,
+      // required: true,
+    },
+    title: {
+      type: String,
+      required: true
     },
     discount: {
       type: String,
-      required: true,
+      // required: true,
     },
     start_date: {
       type: String,
-      required: true,
+      // required: true,
     },
     expiry_date: {
       type: String,
-      required: true,
+      // required: true,
     },
     quantity: {
       type: Number,
@@ -42,7 +46,10 @@ const koopon = new Schema(
     data: {},
     store: {
       type: String,
-      unique: true
+      // unique: true
+    },
+    views: {
+      type: [String]
     }
   },
   { timestamps: true }

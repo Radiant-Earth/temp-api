@@ -12,6 +12,7 @@ async function createKoopon(req, res) {
     expiry_date,
     quantity,
     store,
+    title,
     _id
   } = req.body;
   if (

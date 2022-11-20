@@ -15,12 +15,13 @@ async function createKoopon(req, res) {
     _id
   } = req.body;
   if (
+    !title ||
     !account_id ||
-    !price ||
-    !store_name ||
-    !discount ||
-    !start_date ||
-    !expiry_date ||
+    // !price ||
+    // !store_name ||
+    // !discount ||
+    // !start_date ||
+    // !expiry_date ||
     !quantity ||
     !description ||
     !store

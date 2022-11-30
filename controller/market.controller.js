@@ -1,40 +1,11 @@
-const { Koopon } = require("./coupon.model");
+const { Market } = require("../model/market.model");
 
-async function createKoopon(req, res) {
+async function createMarket(req, res) {
   console.log(req.body);
-  let {
-    account_id,
-    price,
-    store_name,
-    discount,
-    description,
-    start_date,
-    expiry_date,
-    quantity,
-    store,
-    title,
-    _id
-  } = req.body;
-  if (
-    !title ||
-    !account_id ||
-    // !price ||
-    // !store_name ||
-    // !discount ||
-    // !start_date ||
-    // !expiry_date ||
-    !quantity ||
-    !description ||
-    !store
-  ) {
-    res.status(400).json({
-      message: `fields missing`,
-    });
-    return;
-  }
+  
   try {
-    let data = await Koopon.findOneAndUpdate({ _id }, { ...req.body });
-    const allData = await Koopon.find({ _id });
+    let data = await Market.findOneAndUpdate({ approval_id: approval_id}, { ...req.body });
+    const allData = await Market.find({ approval_id: approval_id});
     console.log(data);
     if (data) {
       res.status(200).json({
@@ -43,7 +14,7 @@ async function createKoopon(req, res) {
       });
       return;
     }
-    const coupon = new Koopon({
+    const coupon = new Market({
       ...req.body,
     });
 
@@ -69,7 +40,7 @@ async function getMyCoupons(req, res) {
   })
 
   try {
-    const myCoupons = await Koopon.find({ account_id: id });
+    const myCoupons = await Market.find({ account_id: id });
 
     if (!myCoupons.length) return res.status(404).json({
         message: 'No coupon found, create a coupon.'
@@ -100,11 +71,11 @@ async function updateMyCoupon(req, res) {
   console.log(req.body)
 
   try {
-    const coupon = await Koopon.findByIdAndUpdate({ _id: id}, { data: req.body.data, is_minted: req.body.is_minted}, { upsert: false});
+    const coupon = await Market.findByIdAndUpdate({ _id: id}, { data: req.body.data, is_minted: req.body.is_minted}, { upsert: false});
 
     console.log('Updated==========> ', coupon)
 
-    const myCoupons = await Koopon.find({ account_id: req.body.data.ownerId});
+    const myCoupons = await Market.find({ account_id: req.body.data.ownerId});
 
     if (!myCoupons.length) return res.status(404).json({
         message: 'No coupon found, create a coupon.'
@@ -128,7 +99,7 @@ async function getAllCoupons(req, res) {
 
 
   try {
-    const coupons = await Koopon.find();
+    const coupons = await Market.find();
     return res.status(200).json({
         message: 'successful!',
         data: coupons
@@ -147,7 +118,7 @@ async function deleteCoupon(req, res) {
   const id = req.params.id
 
   try {
-    const coupon = await Koopon.findOneAndDelete({ _id: id })
+    const coupon = await Market.findOneAndDelete({ _id: id })
     console.log('Deleted coupon ========> ', coupon);
     if (!coupon) {
       return res.status(404).json({
@@ -171,4 +142,4 @@ async function deleteCoupon(req, res) {
 
 
 
-module.exports = { createKoopon, getMyCoupons, getAllCoupons, updateMyCoupon, deleteCoupon };
+module.exports = { createMarket, getMyCoupons, getAllCoupons, updateMyCoupon, deleteCoupon };

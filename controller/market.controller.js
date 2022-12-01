@@ -99,13 +99,14 @@ async function getAllCoupons(req, res) {
 
 
   try {
-    const coupons = await Market.find();
+    const listedCoupons = await Market.find();
     return res.status(200).json({
         message: 'successful!',
-        data: coupons
+        data: listedCoupons
     })
 
   } catch (error) {
+    console.log(error)
     res.status(400).json({
         message: 'Something went wrong!'
     })

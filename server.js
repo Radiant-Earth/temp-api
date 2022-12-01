@@ -47,7 +47,7 @@ app.get('/', (req, res, next) => {
 
 app.use(authRoutes);
 app.use(routes);
-app.use(marketRoutes);
+app.use('/koopon', marketRoutes);
 app.use(raffleRoutes);
 
 

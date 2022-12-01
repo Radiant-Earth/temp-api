@@ -22,7 +22,7 @@ async function createMarket(req, res) {
     }
 
 
-    getAllCoupons(req, res);
+    getAllListedCoupons(req, res);
 
   } catch (error) {
     console.log(error);
@@ -95,7 +95,7 @@ async function updateMyCoupon(req, res) {
 
 }
 
-async function getAllCoupons(req, res) {
+async function getAllListedCoupons(req, res) {
 
 
   try {
@@ -143,4 +143,4 @@ async function deleteCoupon(req, res) {
 
 
 
-module.exports = { createMarket, getMyCoupons, getAllCoupons, updateMyCoupon, deleteCoupon };
+module.exports = { createMarket, getMyCoupons, getAllListedCoupons, updateMyCoupon, deleteCoupon };

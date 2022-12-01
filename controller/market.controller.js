@@ -7,7 +7,7 @@ async function createMarket(req, res) {
 
     for (let index = 0; index < req.body.length; index++) {
       
-      let data = await Market.findOneAndUpdate({ approval_id: req.body[index].approval_id}, { ...req.body[index] });
+      let data = await Market.findOneAndUpdate({ approval_id: req.body[index].approval_id}, { ...req.body[index] }, {upsert: true});
 
       console.log(data);
       

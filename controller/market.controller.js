@@ -4,26 +4,26 @@ async function createMarket(req, res) {
   console.log(req.body);
   
   try {
-    let data = await Market.findOneAndUpdate({ approval_id: approval_id}, { ...req.body });
-    const allData = await Market.find({ approval_id: approval_id});
-    console.log(data);
-    if (data) {
-      res.status(200).json({
-        message: "successful",
-        data: allData,
-      });
-      return;
+
+    for (let index = 0; index < req.body.length; index++) {
+      
+      let data = await Market.findOneAndUpdate({ approval_id: approval_id}, { ...req.body });
+
+      console.log(data);
+      
+      if (!data) {
+        const coupon = new Market({
+          ...req.body,
+        });
+    
+        await coupon.save();
+      }
+      
     }
-    const coupon = new Market({
-      ...req.body,
-    });
 
-    await coupon.save();
 
-    res.status(201).json({
-      message: "Successfully created!",
-      data: allData,
-    });
+    getAllCoupons(req, res);
+
   } catch (error) {
     console.log(error);
     res.status(400).json({

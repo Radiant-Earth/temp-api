@@ -7,13 +7,13 @@ async function createMarket(req, res) {
 
     for (let index = 0; index < req.body.length; index++) {
       
-      let data = await Market.findOneAndUpdate({ approval_id: req.body[index].approval_id}, { ...req.body[i] });
+      let data = await Market.findOneAndUpdate({ approval_id: req.body[index].approval_id}, { ...req.body[index] });
 
       console.log(data);
       
       if (!data) {
         const listing = new Market({
-          ...req.body[i],
+          ...req.body[index],
         });
     
         await listing.save();

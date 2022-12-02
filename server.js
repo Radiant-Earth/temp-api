@@ -21,7 +21,7 @@ var whitelist;
 var corsOptions;
 
 if (process.env.NODE_ENV === 'production') {
-    whitelist = ['http://localhost:3000', 'https://koopon.vercel.app', 'https://koopon-puce.vercel.app', 'http://localhost:3000']
+    whitelist = ['http://localhost:3000', 'https://koopon.vercel.app', 'https://koopon-puce.vercel.app']
     corsOptions = {
         origin: function (origin, callback) {
         if (whitelist.indexOf(origin) !== -1) {

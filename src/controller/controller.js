@@ -1,4 +1,4 @@
-const { Koopon } = require("./coupon.model");
+const { Koopon } = require("../model/coupon.model");
 
 async function createKoopon(req, res) {
   console.log(req.body);

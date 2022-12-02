@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { createKoopon, getMyCoupons, getAllCoupons, updateMyCoupon, deleteCoupon } = require("./controller");
+const { createKoopon, getMyCoupons, getAllCoupons, updateMyCoupon, deleteCoupon } = require("../controller/controller");
 
 const Routes = express.Router();
 

@@ -5,10 +5,10 @@ const dotenv = require('dotenv');
 
 
 
-const routes = require('./routes');
-const authRoutes =  require('./routes/auth.routes');
-const raffleRoutes = require('./routes/raffle.routes');
-const marketRoutes = require('./routes/market.routes');
+const routes = require('./src/routes/routes');
+const authRoutes =  require('./src/routes/auth.routes');
+const raffleRoutes = require('./src/routes/raffle.routes');
+const marketRoutes = require('./src/routes/market.routes');
 
 
 dotenv.config();

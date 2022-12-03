@@ -1,15 +1,14 @@
 const { Market } = require("../model/market.model");
 
 async function createMarket(req, res) {
-  console.log(req.body);
   
   try {
 
     for (let index = 0; index < req.body.length; index++) {
       
-      let data = await Market.findOneAndUpdate({ metadata_id: req.body[index].metadata_id}, { ...req.body[index] }, {upsert: true});
+      let data = await Market.findOneAndUpdate({ metadata_id: req.body[index]["metadata_id"] }, { ...req.body[index] }, {upsert: true});
 
-      console.log(data);
+      console.log("Does List NFT exist? ", data);
       
       if (!data) {
         const listing = new Market({

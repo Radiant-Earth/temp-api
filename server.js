@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
@@ -38,6 +39,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(cors());
 app.use(express.json());
+app.use(morgan('combined'));
 
 app.get('/', (req, res, next) => {
     res.status(200).json({

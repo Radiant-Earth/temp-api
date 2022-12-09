@@ -15,9 +15,9 @@ async function createKoopon(req, res) {
     title,
     _id
   } = req.body;
-  if (!_id) return res.status(400).json({
-    message: '_id cannot be blank!'
-  })
+  // if (!_id) return res.status(400).json({
+  //   message: '_id cannot be blank!'
+  // })
   try {
     let data = await Koopon.findOneAndUpdate({ _id }, { ...req.body });
       

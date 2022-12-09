@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 
 
 
-const routes = require('./src/routes/routes');
+const routes = require('./src/routes/koopon.routes');
 const authRoutes =  require('./src/routes/auth.routes');
 const raffleRoutes = require('./src/routes/raffle.routes');
 const marketRoutes = require('./src/routes/market.routes');

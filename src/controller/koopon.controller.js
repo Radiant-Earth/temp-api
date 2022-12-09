@@ -15,25 +15,25 @@ async function createKoopon(req, res) {
     title,
     _id
   } = req.body;
-  if (
-    !title ||
-    !account_id ||
-    // !price ||
-    // !store_name ||
-    // !discount ||
-    // !start_date ||
-    // !expiry_date ||
-    !quantity ||
-    !description ||
-    !store
-  ) {
-    res.status(400).json({
-      message: `fields missing`,
-    });
-    return;
-  }
   try {
     let data = await Koopon.findOneAndUpdate({ _id }, { ...req.body });
+      if (
+        !title ||
+        !account_id ||
+        // !price ||
+        // !store_name ||
+        // !discount ||
+        // !start_date ||
+        // !expiry_date ||
+        !quantity ||
+        !description ||
+        !store
+      ) {
+        res.status(400).json({
+          message: `fields missing`,
+        });
+        return;
+      }
     const allData = await Koopon.find({ _id });
     console.log(data);
     if (data) {

@@ -35,7 +35,6 @@ if (process.env.NODE_ENV === 'production') {
         } else {
     corsOptions = {}
 }
-            
 
 app.use(cors());
 app.use(express.json());

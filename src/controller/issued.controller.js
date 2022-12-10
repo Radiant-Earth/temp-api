@@ -1,0 +1,72 @@
+const { Issued } = require("../model/issued.model");
+const { httpSendEmail } = require("../utils/utils");
+
+async function createIssuedToken(req, res) {
+  try {
+   
+    let data = await Issued.findOneAndUpdate({ _id: req.body._id }, { ...req.body });
+      
+    const allData = await Issued.find({ issuerId: req.body.issuerId });
+    console.log(data);
+    if (data) {
+      res.status(200).json({
+        message: "successful",
+        data: allData,
+      });
+      return;
+    }
+
+    // validation will be here
+
+    const emailResponse =  await httpSendEmail({
+      fullName: req.body.fullName,
+      metadata_id: req.body.metadata_id,
+      link: req.body.link,
+      email: req.body.email
+    });
+
+    console.log("Email response: ", emailResponse);
+
+    const issuedToken = new Issued({
+      ...req.body,
+    });
+
+    await issuedToken.save();
+
+    res.status(201).json({
+      message: "Email sent successfully!",
+      data: allData,
+    });
+    
+  } catch (error) {
+    console.log("Error controller: ", error);
+    res.status(400).json({
+      message: "Something went wrong, unable to send email",
+      error
+    })
+  }
+}
+
+async function updateIssuedToken(req, res) {}
+
+async function getMyIssuedToken(req, res) {}
+
+module.exports = {
+  createIssuedToken,
+  updateIssuedToken,
+  getMyIssuedToken
+}
+
+
+// {
+//   "issuerId":"mbiplang.testnet",
+//   "fullName": "Mbiplang Ardel",
+//   "title": "Flash sale on all bags",
+//   "email": "jothamardel@gmail.com",
+//   "phone": "",
+//   "accountId": "",
+//   "tokenId":"1",
+//   "expiryDate": "",
+//   "metadata_id": "mynewstore.mintspace2.testnet:fc1f8793da7c9e7431c433b0524c06f2",
+//   "link": "http://localhost:3000/coupon-details/mynewstore.mintspace2.testnet:fc1f8793da7c9e7431c433b0524c06f2"
+// }

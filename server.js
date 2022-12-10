@@ -6,10 +6,12 @@ const dotenv = require('dotenv');
 
 
 
+
 const routes = require('./src/routes/koopon.routes');
 const authRoutes =  require('./src/routes/auth.routes');
 const raffleRoutes = require('./src/routes/raffle.routes');
 const marketRoutes = require('./src/routes/market.routes');
+const issuedRoutes = require('./src/routes/issued.routes');
 
 
 dotenv.config();
@@ -17,6 +19,10 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8000;
+
+
+
+
 
 var whitelist;
 var corsOptions;
@@ -50,6 +56,7 @@ app.use(authRoutes);
 app.use('/koopon', marketRoutes);
 app.use(routes);
 app.use(raffleRoutes);
+app.use('/koopon', issuedRoutes);
 
 
 

@@ -120,7 +120,8 @@ async function deleteCoupon(req, res) {
   const id = req.params.id
 
   try {
-    const coupon = await Market.findOneAndDelete({ _id: id })
+    const coupon = await Market.findOneAndDelete({ 
+      metadata_id: id })
     console.log('Deleted coupon ========> ', coupon);
     if (!coupon) {
       return res.status(404).json({

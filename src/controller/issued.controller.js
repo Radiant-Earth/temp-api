@@ -21,7 +21,7 @@ async function createIssuedToken(req, res) {
     const emailResponse =  await httpSendEmail({
       fullName: req.body.fullName,
       metadata_id: req.body.metadata_id,
-      link: req.body.link,
+      link: `${req.body.link}?is_new=true&fullName=${req.body.fullName}&email=${req.body.email}&phone=${req.body.phone}`,
       email: req.body.email
     });
 
@@ -47,7 +47,23 @@ async function createIssuedToken(req, res) {
   }
 }
 
-async function updateIssuedToken(req, res) {}
+async function updateIssuedToken(req, res) {
+  try {
+    if (req.body.email) {
+      const data = await Issued.findByIdAndUpdate({ email: req.body.email }, {...req.body}, { upsert: true});
+      res.status(200).json({
+        message: "Issue account updated successfully!",
+        data
+      })
+    }
+  } catch (error) {
+    console.log(error);
+    res.state(400).json({
+      message: "Something went wrong, unable to issue account",
+      error
+    })
+  }
+}
 
 async function getMyIssuedToken(req, res) {}
 

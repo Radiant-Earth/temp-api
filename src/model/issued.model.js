@@ -38,7 +38,7 @@ const Issued = new Schema(
     },
     isActive: {
       type: Boolean,
-      default: true
+      default: false
     },
     metadata_id: {
       type: String,

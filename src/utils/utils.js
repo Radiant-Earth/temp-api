@@ -40,9 +40,8 @@ async function httpSendEmail(data) {
     var template = handlebars.compile(html);
     var replacements = {
       username: data.fullName,
-      email: data.email,
       store: data.metadata_id.split(".")[0],
-      link: data.link + `&email=${data.email}`,
+      link: data.link,
     };
     var htmlToSend = template(replacements);
     let mailOptions = {

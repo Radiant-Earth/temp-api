@@ -3,9 +3,11 @@ const { httpSendEmail } = require("../utils/utils");
 
 async function createIssuedToken(req, res) {
   try {
-   
-    let data = await Issued.findOneAndUpdate({ _id: req.body._id }, { ...req.body });
-      
+    let data = await Issued.findOneAndUpdate(
+      { _id: req.body._id },
+      { ...req.body }
+    );
+
     const allData = await Issued.find({ issuerId: req.body.issuerId });
     console.log(data);
     if (data) {
@@ -18,50 +20,53 @@ async function createIssuedToken(req, res) {
 
     // validation will be here
 
-    const emailResponse =  await httpSendEmail({
-      fullName: req.body.fullName,
-      metadata_id: req.body.metadata_id,
-      link: `${req.body.link}?is_new=true&fullName=${req.body.fullName}&email=${req.body.email}&phone=${req.body.phone}`,
-      email: req.body.email
-    });
-
-    console.log("Email response: ", emailResponse);
-
     const issuedToken = new Issued({
       ...req.body,
     });
 
     await issuedToken.save();
 
+    const emailResponse = await httpSendEmail({
+      fullName: req.body.fullName,
+      metadata_id: req.body.metadata_id,
+      link: `${req.body.link}?is_new=true&fullName=${req.body.fullName}&email=${req.body.email}&phone=${req.body.phone}&_id=${issuedToken._id}`,
+      email: req.body.email,
+    });
+
+    console.log("Email response: ", emailResponse);
+
     res.status(201).json({
       message: "Email sent successfully!",
       data: allData,
     });
-    
   } catch (error) {
     console.log("Error controller: ", error);
     res.status(400).json({
       message: "Something went wrong, unable to send email",
-      error
-    })
+      error,
+    });
   }
 }
 
 async function updateIssuedToken(req, res) {
   try {
     if (req.body.email) {
-      const data = await Issued.findByIdAndUpdate({ email: req.body.email }, {...req.body}, { upsert: true});
+      const data = await Issued.findByIdAndUpdate(
+        { email: req.body.email },
+        { ...req.body },
+        { upsert: true }
+      );
       res.status(200).json({
         message: "Issue account updated successfully!",
-        data
-      })
+        data,
+      });
     }
   } catch (error) {
     console.log(error);
     res.state(400).json({
       message: "Something went wrong, unable to issue account",
-      error
-    })
+      error,
+    });
   }
 }
 
@@ -70,9 +75,8 @@ async function getMyIssuedToken(req, res) {}
 module.exports = {
   createIssuedToken,
   updateIssuedToken,
-  getMyIssuedToken
-}
-
+  getMyIssuedToken,
+};
 
 // {
 //   "issuerId":"mbiplang.testnet",

@@ -52,7 +52,7 @@ async function updateIssuedToken(req, res) {
   try {
     if (req.body.email) {
       const data = await Issued.findByIdAndUpdate(
-        { email: req.body.email },
+        { _id: req.body._id },
         { ...req.body },
         { upsert: true }
       );
@@ -63,7 +63,7 @@ async function updateIssuedToken(req, res) {
     }
   } catch (error) {
     console.log(error);
-    res.state(400).json({
+    res.status(400).json({
       message: "Something went wrong, unable to issue account",
       error,
     });

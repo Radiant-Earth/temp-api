@@ -18,6 +18,12 @@ const Market = new Schema(
     price: Number,
     receipt_id:String,
     reference:String,
+    views: {
+      type: [String],
+      default: []
+    },
+    country: String,
+    city: String,
     reference_blob: 
       {
         media: String, 

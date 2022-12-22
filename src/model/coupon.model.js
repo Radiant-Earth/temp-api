@@ -24,6 +24,9 @@ const koopon = new Schema(
       type: String,
       required: true
     },
+    category: {
+      type: String,
+    },
     discount: {
       type: String,
       // required: true,

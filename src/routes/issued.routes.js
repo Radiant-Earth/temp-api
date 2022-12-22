@@ -1,16 +1,15 @@
 const express = require("express");
 
-const { 
+const {
   createIssuedToken,
   updateIssuedToken,
-  getMyIssuedToken
+  getMyIssuedToken,
 } = require("../controller/issued.controller");
 
 const Routes = express.Router();
 
+Routes.post("/issued/create", createIssuedToken);
+Routes.get("/issued/:id", getMyIssuedToken);
+Routes.put("/issued/update/:id", updateIssuedToken);
 
-Routes.post('/issued/create', createIssuedToken);
-Routes.get('/issued/:id', getMyIssuedToken);
-Routes.put('/issued/update/:id', updateIssuedToken);
-
-module.exports = Routes
+module.exports = Routes;

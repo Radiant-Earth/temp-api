@@ -70,7 +70,21 @@ async function updateIssuedToken(req, res) {
   }
 }
 
-async function getMyIssuedToken(req, res) {}
+async function getMyIssuedToken(req, res) {
+  try {
+    const allIssuedTokens = await Issued.find({ issuerId: req.params.id})
+    res.status(200).json({
+      message: "successful",
+      data: allIssuedTokens,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      message: "Something went wrong, unable to get issued tokens",
+      error,
+    });
+  }
+}
 
 module.exports = {
   createIssuedToken,

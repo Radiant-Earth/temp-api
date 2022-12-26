@@ -131,6 +131,7 @@ module.exports = {
   httpCreateNewUser,
   httpLoginUser,
   httpUpdateUser,
+  httpGetUserDetails
 };
 
 // async function deleteCoupon(req, res) {

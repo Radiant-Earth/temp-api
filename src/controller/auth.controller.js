@@ -92,7 +92,11 @@ async function httpLoginUser(req, res) {
 
 async function httpUpdateUser(req, res) {
   try {
-    const userUpdate = await User.findByIdAndUpdate({ accountId: req.body.accountId }, {...req.body}, { upsert: true });
+    const userUpdate = await User.updateOne(
+      { accountId: req.body.accountId },
+      { ...req.body },
+      { upsert: true }
+    );
 
     httpGetUserDetails(req, res);
   } catch (error) {
@@ -111,15 +115,15 @@ async function httpGetUserDetails(req, res) {
     res.status(200).json({
       message: "successful!",
       success: true,
-      data: user
-    })
+      data: user,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(400).json({
       message: "unable to get user details.",
       success: false,
-      error: error.message
-    })
+      error: error.message,
+    });
   }
 }
 

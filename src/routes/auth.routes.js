@@ -10,6 +10,6 @@ const Routes = express.Router();
 
 Routes.post("/signup", httpCreateNewUser);
 Routes.post("/signin", httpLoginUser);
-Routes.post("/update-user", httpUpdateUser);
+Routes.put("/update-user", httpUpdateUser);
 
 module.exports = Routes;

@@ -17,7 +17,16 @@ const User = new Schema(
     },
     password: {
       type: String,
-      required: true
+      // required: true
+    },
+    country: {
+      type: String
+    },
+    emoji: {
+      type: String
+    },
+    accountId: {
+      type: String
     }
   },
   { timestamps: true }

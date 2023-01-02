@@ -127,11 +127,29 @@ async function httpGetUserDetails(req, res) {
   }
 }
 
+async function httpGetAllUsers(req, res) {
+  try {
+    const allUser = await User.find();
+    res.status(200).json({
+      message: "successful!",
+      success: true,
+      data: allUser
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "unable to get user details.",
+      success: false,
+      error: error.message,
+    })
+  }
+}
+
 module.exports = {
   httpCreateNewUser,
   httpLoginUser,
   httpUpdateUser,
-  httpGetUserDetails
+  httpGetUserDetails,
+  httpGetAllUsers
 };
 
 // async function deleteCoupon(req, res) {

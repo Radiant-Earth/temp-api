@@ -1,4 +1,5 @@
 const { Koopon } = require("../model/coupon.model");
+const { User } = require("../model/auth.model");
 
 async function createKoopon(req, res) {
   console.log(req.body);
@@ -102,7 +103,18 @@ async function getCouponsByCountry(req, res) {
     });
 
   try {
-    const myCoupons = await Koopon.find({ country: id });
+    // get the users in the same country
+
+    const docs = await User.find({ country: "Nigeria" });
+    console.log("Documents::::::::::::::::::::>", docs);
+
+    const users = docs.map((item) => item.accountId);
+    console.log("Users::::::::::::::::::::::::>", users);
+
+    // query to get the coupons created by these users
+
+    const myCoupons = await Koopon.find({ account_id: { $in: users } });
+    console.log("Coupons:::::::::::::::::::::>", myCoupons);
 
     if (!myCoupons.length)
       return res.status(404).json({

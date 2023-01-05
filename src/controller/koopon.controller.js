@@ -105,16 +105,16 @@ async function getCouponsByCountry(req, res) {
   try {
     // get the users in the same country
 
-    const docs = await User.find({ country: "Nigeria" });
-    console.log("Documents::::::::::::::::::::>", docs);
+    const docs = await User.find({ country: id });
+    // console.log("Documents::::::::::::::::::::>", docs);
 
     const users = docs.map((item) => item.accountId);
-    console.log("Users::::::::::::::::::::::::>", users);
+    // console.log("Users::::::::::::::::::::::::>", users);
 
     // query to get the coupons created by these users
 
     const myCoupons = await Koopon.find({ account_id: { $in: users } });
-    console.log("Coupons:::::::::::::::::::::>", myCoupons);
+    // console.log("Coupons:::::::::::::::::::::>", myCoupons);
 
     if (!myCoupons.length)
       return res.status(404).json({

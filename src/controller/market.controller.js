@@ -1,4 +1,5 @@
 const { Market } = require("../model/market.model");
+const { User } = require("../model/auth.model");
 
 async function createMarket(req, res) {
   try {
@@ -113,6 +114,45 @@ async function getAllListedCoupons(req, res) {
   }
 }
 
+
+async function getCouponsByCountry(req, res) {
+  const id = req.params.id;
+
+  if (!id)
+    return res.status(404).json({
+      message: "something went wrong!",
+    });
+
+  try {
+    // get the users in the same country
+
+    const docs = await User.find({ country: id });
+    // console.log("Documents::::::::::::::::::::>", docs);
+
+    const users = docs.map((item) => item.accountId);
+    // console.log("Users::::::::::::::::::::::::>", users);
+
+    // query to get the coupons created by these users
+
+    const myCoupons = await Market.find({ listed_by: { $in: users } });
+    // console.log("Coupons:::::::::::::::::::::>", myCoupons);
+
+    if (!myCoupons.length)
+      return res.status(404).json({
+        message: "No coupon found, create a coupon.",
+      });
+
+    return res.status(200).json({
+      message: "successful!",
+      data: myCoupons,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Something went wrong!",
+    });
+  }
+}
+
 async function deleteCoupon(req, res) {
   const id = req.params.id;
 
@@ -142,4 +182,5 @@ module.exports = {
   getAllListedCoupons,
   updateListedCoupon,
   deleteCoupon,
+  getCouponsByCountry
 };

@@ -1,5 +1,6 @@
 const { Koopon } = require("../model/coupon.model");
 const { User } = require("../model/auth.model");
+const { Market } = require("../model/market.model");
 
 async function createKoopon(req, res) {
   console.log(req.body);
@@ -113,7 +114,7 @@ async function getCouponsByCountry(req, res) {
 
     // query to get the coupons created by these users
 
-    const myCoupons = await Koopon.find({ account_id: { $in: users } });
+    const myCoupons = await Market.find({ account_id: { $in: users } });
     // console.log("Coupons:::::::::::::::::::::>", myCoupons);
 
     if (!myCoupons.length)

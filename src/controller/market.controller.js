@@ -114,7 +114,6 @@ async function getAllListedCoupons(req, res) {
   }
 }
 
-
 async function getCouponsByCountry(req, res) {
   const id = req.params.id;
 
@@ -127,15 +126,15 @@ async function getCouponsByCountry(req, res) {
     // get the users in the same country
 
     const docs = await User.find({ country: id });
-    // console.log("Documents::::::::::::::::::::>", docs);
+    console.log("Documents::::::::::::::::::::>", docs);
 
     const users = docs.map((item) => item.accountId);
-    // console.log("Users::::::::::::::::::::::::>", users);
+    console.log("Users::::::::::::::::::::::::>", users);
 
     // query to get the coupons created by these users
 
     const myCoupons = await Market.find({ listed_by: { $in: users } });
-    // console.log("Coupons:::::::::::::::::::::>", myCoupons);
+    console.log("Coupons:::::::::::::::::::::>", myCoupons);
 
     if (!myCoupons.length)
       return res.status(404).json({
@@ -182,5 +181,5 @@ module.exports = {
   getAllListedCoupons,
   updateListedCoupon,
   deleteCoupon,
-  getCouponsByCountry
+  getCouponsByCountry,
 };

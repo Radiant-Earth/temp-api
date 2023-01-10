@@ -30,8 +30,13 @@ async function httpSendEmail(data) {
   //   },
   // });
 
+  // console.log({
+  //   name: process.env.MAIL_NAME,
+  //   pass: process.env.MAIL_KEY,
+  // });
+
   let transporter = nodemailer.createTransport({
-    port: 587,
+    port: 465,
     host: "smtp.zoho.com",
     auth: {
       user: `${process.env.MAIL_NAME}`,

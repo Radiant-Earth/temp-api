@@ -29,6 +29,12 @@ async function httpSendEmail(data) {
   //     refreshToken: process.env.OAUTH_REFRESH_TOKEN,
   //   },
   // });
+
+  console.log({
+    name: process.env.MAIL_NAME,
+    pass: process.env.MAIL_KEY,
+  });
+
   let transporter = nodemailer.createTransport({
     port: 465,
     host: "smtp.zoho.com",
@@ -57,13 +63,24 @@ async function httpSendEmail(data) {
     };
     var htmlToSend = template(replacements);
     let mailOptions = {
-      from: "ardelmbiplang@gmail.com",
+      from: process.env.MAIL_NAME,
       to: data.email,
       subject: `[REWARDED] ${
         data.metadata_id.split(".")[0]
       } sent you a coupon!!!`,
       html: htmlToSend,
     };
+
+    transporter.verify((error, success) => {
+      if (error) {
+        console.log(error.message);
+      }
+      console.log({
+        success: success,
+        message: "mail server is ready for your messages",
+      });
+    });
+
     transporter.sendMail(mailOptions, function (err, data) {
       if (err) {
         console.log("Error " + err);

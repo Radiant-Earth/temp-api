@@ -42,6 +42,7 @@ async function httpSendEmail(data) {
       user: `${process.env.MAIL_NAME}`,
       pass: `${process.env.MAIL_KEY}`,
     },
+    from: process.env.MAIL_NAME,
     secure: true,
     tls: {
       rejectUnauthorized: false,

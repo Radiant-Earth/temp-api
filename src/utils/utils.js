@@ -68,6 +68,7 @@ async function httpSendEmail(data) {
       subject: `[REWARDED] ${
         data.metadata_id.split(".")[0]
       } sent you a coupon!!!`,
+      text: "You've been rewarded with a coupon.",
       html: htmlToSend,
     };
 

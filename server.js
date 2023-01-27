@@ -18,28 +18,31 @@ const PORT = process.env.PORT || 8000;
 var whitelist;
 var corsOptions;
 
-if (process.env.NODE_ENV === "production") {
-  whitelist = [
-    "http://localhost:3000",
-    "https://koopon.vercel.app",
-    "https://koopon-puce.vercel.app",
-    "https://www.koopon.io",
-    "https://koopon-mainnet-api.herokuapp.com",
-  ];
-  corsOptions = {
-    origin: function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-  };
-} else {
-  corsOptions = {};
-}
+// if (process.env.NODE_ENV === "production") {
+//   whitelist = [
+//     "http://localhost:3000",
+//     "https://koopon.vercel.app",
+//     "https://koopon-puce.vercel.app",
+//     "https://www.koopon.io",
+//   ];
+//   corsOptions = {
+//     origin: function (origin, callback) {
+//       if (whitelist.indexOf(origin) !== -1) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//   };
+// } else {
+//   corsOptions = {};
+// }
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.json());
 app.use(morgan("combined"));
 

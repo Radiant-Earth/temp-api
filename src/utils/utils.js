@@ -49,6 +49,11 @@ async function httpSendEmail(data) {
     },
   });
 
+  console.log({
+    key: process.env.MAIL_KEY,
+    name: process.env.MAIL_NAME,
+  });
+
   // console.log(__dirname + '/../public/index.html')
 
   readHTMLFile(__dirname + "/../utils/welcomeMail.html", function (err, html) {

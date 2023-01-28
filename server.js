@@ -27,6 +27,8 @@ if (process.env.NODE_ENV === "production") {
   ];
   corsOptions = {
     origin: function (origin, callback) {
+      console.log("Origin:========>", origin);
+      console.log("Whitelist indexOf: ", whitelist.indexOf(origin));
       if (whitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {

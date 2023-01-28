@@ -64,11 +64,13 @@ async function httpSendEmail(data) {
     };
     var htmlToSend = template(replacements);
     let mailOptions = {
-      from: process.env.MAIL_NAME,
-      to: data.email,
+      envelope: {
+        from: process.env.MAIL_NAME,
+        to: data.email,
+      },
       subject: `[REWARDED] ${
         data.metadata_id.split(".")[0]
-      } sent you a coupon!!!`,
+      } store sent you a coupon!!!`,
       text: "You've been rewarded with a coupon.",
       html: htmlToSend,
     };

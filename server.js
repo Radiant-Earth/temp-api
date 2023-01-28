@@ -38,6 +38,8 @@ if (process.env.NODE_ENV === "production") {
   corsOptions = {};
 }
 
+console.log("Cors options=========================>", corsOptions);
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan("combined"));

@@ -51,7 +51,7 @@ async function httpSendEmail(data) {
 
   // console.log(__dirname + '/../public/index.html')
 
-  readHTMLFile(__dirname + "/../public/index.html", function (err, html) {
+  readHTMLFile(__dirname + "/../utils/welcomeMail.html", function (err, html) {
     if (err) {
       console.log("error reading file", err);
       return;

@@ -22,11 +22,11 @@ if (process.env.NODE_ENV === "production") {
   whitelist = [
     "http://localhost:3000",
     "https://www.koopon.io",
-    "https://testnet.koopon.io/",
+    "https://testnet.koopon.io",
   ];
   corsOptions = {
     origin: function (origin, callback) {
-      console.log(origin)
+      console.log(origin);
       if (whitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {

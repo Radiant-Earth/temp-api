@@ -21,14 +21,11 @@ var corsOptions;
 if (process.env.NODE_ENV === "production") {
   whitelist = [
     "http://localhost:3000",
-    "https://koopon.vercel.app",
-    "https://koopon-puce.vercel.app",
     "https://www.koopon.io",
+    "https://testnet.koopon.io/",
   ];
   corsOptions = {
     origin: function (origin, callback) {
-      console.log("Origin:========>", origin);
-      console.log("Whitelist indexOf: ", whitelist.indexOf(origin));
       if (whitelist.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
@@ -39,8 +36,6 @@ if (process.env.NODE_ENV === "production") {
 } else {
   corsOptions = {};
 }
-
-console.log("Cors options=========================>", corsOptions);
 
 app.use(cors(corsOptions));
 app.use(express.json());
